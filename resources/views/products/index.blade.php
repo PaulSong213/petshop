@@ -27,7 +27,9 @@
                             <i class="fas fa-plus"> Add New Products</i></a></div>
                     <div class="card-body overflow-auto" >
                         <section id="search-table">
-                            @livewire('table',['tableColumns' => array_keys($products->first()->toArray()), 'excludedColumns' => ['id','product_code','barcode','created_at','updated_at'], 'tableTitle' => 'Search Product'])
+                            @if (sizeof($products) > 0)
+                                @livewire('table',['tableColumns' => array_keys($products->first()->toArray()), 'excludedColumns' => ['id','product_code','barcode','created_at','updated_at'], 'tableTitle' => 'Search Product'])
+                            @endif
                         </section>  
 
                         <table class="table table-bordered table-left" id="main-table">

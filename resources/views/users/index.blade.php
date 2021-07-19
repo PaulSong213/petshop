@@ -26,7 +26,9 @@
                             <i class="fas fa-plus"> Add New Users</i></a></div>
                     <div class="card-body overflow-auto">
                         <section id="search-table">
-                            @livewire('table',['tableColumns' => array_keys($users->first()->toArray()), 'excludedColumns' => ['id','email_verified_at','created_at','updated_at'], 'tableTitle' => 'Search Users'])
+                            @if (sizeof($users) > 0))
+                                @livewire('table',['tableColumns' => array_keys($users->first()->toArray()), 'excludedColumns' => ['id','email_verified_at','created_at','updated_at'], 'tableTitle' => 'Search Users'])
+                            @endif
                         </section>  
                         <table class="table table-bordered table-left" id="main-table">
                             <thead>
