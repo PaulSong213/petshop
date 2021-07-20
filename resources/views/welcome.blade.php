@@ -51,9 +51,14 @@
 
 		<div class="flex space-x-1 flex-col-reverse md:flex-row md:justify-between xl:pr-24">
 			<div class="text-white  text-lg md:text-2xl flex space-x-2 md:space-x-0 md:flex-col md:space-y-2 md:justify-end">
-				<ion-icon class="hover:text-yellow-200 transition-colors cursor-pointer" name="logo-facebook"></ion-icon>
-				<ion-icon class="hover:text-yellow-200 transition-colors cursor-pointer" name="mail"></ion-icon>
+                <a href="https://www.facebook.com/johanspethub" target="_blank">
+                    <ion-icon class="hover:text-yellow-200 transition-colors cursor-pointer" name="logo-facebook"></ion-icon>
+                        www.facebook.com/johanspethub</a>
+				<a href = "mailto: johanspethub@yahoo.com">
+                    <ion-icon class="hover:text-yellow-200 transition-colors cursor-pointer" name="mail"></ion-icon>
+                        johanspethub@yahoo.com</a>
 				<ion-icon class="hover:text-yellow-200 transition-colors cursor-pointer" name="call"></ion-icon>
+                   +63 916 461 4767
 			</div>
 			<div class="hidden md:flex justify-center md:justify-end flex-col space-y-4">
 				<div>

@@ -17,9 +17,9 @@
                                         <div class="col-lg-3 col-md-4 col-sm-12 mt-3 text-center">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    {!! $barcode -> barcode !!}
+                                                    <img src="{{ asset('product/barcodes/'. $barcode -> barcode) }}" alt="">
                                                     <h4 class="text-center"
-                                                     style="padding: 1em; margin-top 2em">
+                                                     style="padding: 1em; margin-top 0.5em">
                                                     {{ $barcode->product_code }}
                                                     </h4>
                                                 </div>
