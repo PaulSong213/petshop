@@ -38,7 +38,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
+        redirect()->back()->with('fromAdd', true);
         $password = $request->password;
         $validated = $request->validate([
             'name' => 'required',
@@ -90,6 +90,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        redirect()->back()->with('fromEdit', $id);
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email:rfc|unique:App\Models\User,email',
+            'password' => 'required|min:8',
+            'is_admin' => 'required',
+        ]);
         $users = User::find($id);
         if(!$users){
             return back()->with('Error', 'User not found');

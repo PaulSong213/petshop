@@ -1,7 +1,10 @@
 <nav class="active" id="sidebar">
     <ul class="list-unstyled lead">
         <li class="active">
-            <a href=""><i class="fas fa-home"></i> Home</a>
+            <a href="/"><i class="fas fa-home"></i>Home</a>
+        </li>
+        <li>
+            <a href="/home"><i class="fa fa-align-justify"></i>Dashboard</a>
         </li>
         <li>
             <a href="{{route('orders.index')}}"><i class="fas fa-desktop fa-lg"></i> Orders</a>
@@ -28,13 +31,13 @@
         font-size: 1.1em;
         display: block;
         width: 30vh;
-        color: #008888;
+        color: #d37d2c;
 
             }
     #sidebar ul li a:hover{
       
         color: #fff;
-        background: #008888;
+        background: #d37d2c;
         text-decoration: none !important;
      }
 
@@ -45,7 +48,7 @@
 
     #sidebar ul li.active>a, a[aria-expanded="true"]{
         color: #fff;
-        background: #008888;
+        background: #d37d2c;
     }
 
 </style>

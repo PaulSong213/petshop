@@ -45,19 +45,39 @@
                 <h6 class="select-none rounded-lg p-2 hover:bg-yellow-500 transition-all cursor-pointer table my-auto"><a href="#services">Services</a></h6>
                 <h6 class="select-none rounded-lg p-2 hover:bg-yellow-500 transition-all cursor-pointer table my-auto"><a href="#story">Story</a></h6>
                 <h6 class="select-none rounded-lg p-2 hover:bg-yellow-500 transition-all cursor-pointer table my-auto"><a href="#find-us">Find us</a></h6>
-                <h6 class="select-none -lg p-2 hover:bg-yellow-500 transition-all cursor-pointer table my-auto"><a href="/login">Log in</a></h6>
+                @guest
+                <h6 class="select-none rounded-lg p-2 hover:bg-yellow-500 transition-all cursor-pointer table my-auto"><a href="/login">Log in</a></h6>
+                @else
+                <h6 class="select-none rounded-lg p-2 hover:bg-yellow-500 transition-all cursor-pointer table my-auto text-xs">
+                    <a href="/home" class="flex space-x-1">
+                        <ion-icon class="text-2xl text-white" name="person-circle-outline"></ion-icon>
+                        <p class="table my-auto">{{ Auth::user()->name }}</p>
+                    </a>
+                </h6>
+                <div class="select-none rounded-lg p-2 hover:bg-yellow-500 transition-all cursor-pointer table my-auto text-xs" aria-labelledby="navbarDropdown">
+                    <a class="select-none rounded-lg p-2 hover:bg-yellow-500 transition-all cursor-pointer table my-auto text-xs" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </div>
+                
+                @endguest
             </section>
 		</nav>
 
 		<div class="flex space-x-1 flex-col-reverse md:flex-row md:justify-between xl:pr-24">
 			<div class="text-white  text-lg flex space-x-2 md:space-x-0 md:flex-col md:space-y-2 md:justify-end">
-                <a href="https://www.facebook.com/johanspethub" target="_blank">
-                    <ion-icon class="hover:text-yellow-200 transition-colors cursor-pointer" name="logo-facebook"></ion-icon>
-                        www.facebook.com/johanspethub</a>
-				<a href = "mailto: johanspethub@yahoo.com">
-                    <ion-icon class="hover:text-yellow-200 transition-colors cursor-pointer" name="mail"></ion-icon>
-                        johanspethub@yahoo.com</a>
-				<ion-icon class="hover:text-yellow-200 transition-colors cursor-pointer" name="call"></ion-icon>+63 916 461 4767
+                <a class="hover:text-yellow-200 transition-colors cursor-pointer flex space-x-1"  href="https://www.facebook.com/johanspethub" target="_blank">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                        <span class="hidden md:block text-xs">www.facebook.com/johanspethub</span></a>
+				<a class="hover:text-yellow-200 transition-colors cursor-pointer flex space-x-1" href = "mailto: johanspethub@yahoo.com">
+                    <ion-icon  name="mail"></ion-icon> <span class="hidden md:block text-xs" >johanspethub@yahoo.com</span> </a>
+				<a href="tel:+639164614767" class="hover:text-yellow-200 transition-colors cursor-pointer flex space-x-1">
+                    <ion-icon  name="call"></ion-icon><span class="hidden md:block text-xs">+63 916 461 4767</span>
+                </a>
 			</div>
 			<div class="hidden md:flex justify-center md:justify-end flex-col space-y-4">
 				<div>
