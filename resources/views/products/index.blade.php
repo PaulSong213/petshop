@@ -114,7 +114,7 @@
                 <div class="card">
                     <div class="card-header"><h4>Search product</h4></div>
                     <div class="card-body">
-                        @livewire('item-search',['searchModel' => 'Products','searchColumns' => ['product_name','brand','id'] ])
+                        @livewire('item-search',['searchModel' => 'Products','searchColumns' => ['product_name','brand','id','product_code'] ])
                     </div>
                 </div>
             </div>
