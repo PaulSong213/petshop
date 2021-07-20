@@ -158,8 +158,13 @@
             $('.close-alert').click(function(){
                 $('.alert-added').hide(400);
             });
-            @if ($errors->any())
+            @if ($errors->any() && session('fromAdd'))
             $('.add-item').click();
+            @endif
+
+            @if ($errors->any() && session('fromEdit'))
+            const editId = "{{session('fromEdit')}}";
+            $('#edit' + editId).click();
             @endif
 
             $("#search-table").bind("DOMSubtreeModified", function() {

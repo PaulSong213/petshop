@@ -37,12 +37,13 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        redirect()->back()->with('fromAdd', true);
         $validated = $request->validate([
-            'description' => 'required',
             'product_name' => 'required',
-            'price' => 'required',
-            'alert_stock' => 'required',
-            'quantity' => 'required',
+            'price' => 'required|numeric|min:1',
+            'alert_stock' => 'required|numeric|min:0',
+            'quantity' => 'required|numeric|min:0',
+            'product_code' => 'required'
         ]);
         //product code section
         $product_code = $request->product_code;
@@ -108,7 +109,14 @@ class ProductController extends Controller
      */
     public function update(Request $request, $products)
     {
-
+        redirect()->back()->with('fromEdit', $products);
+        $validated = $request->validate([
+            'product_name' => 'required',
+            'price' => 'required|numeric|min:1',
+            'alert_stock' => 'required|numeric|min:0',
+            'quantity' => 'required|numeric|min:0',
+            'product_code' => 'required'
+        ]);
         //product code section
         $product_code = $request->product_code;
 
