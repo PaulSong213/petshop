@@ -44,18 +44,29 @@ class ProductController extends Controller
             'alert_stock' => 'required',
             'quantity' => 'required',
         ]);
+        //product code section
+        $product_code = $request->product_code;
 
-        $product_code = rand(109876543, 1000000000);
+        $products = new Product;
+        //product image section
+        if ($request->hasFile('product_image')) {
+            $file = $request->file('product_image');
+            $file->move(public_path().'/product/images',
+            $file->getClientOriginalName());
+            $product_image = $file->getClientOriginalName();
+            $products->product_image=$product_image;
+        }
 
-        $redColor = '255, 0 , 0';
-        $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
-        $barcodes = $generator->getBarcode($product_code, $generator::TYPE_STANDARD_2_5, 2, 60);
+       //barcode image section
+        $generator = new Picqer\Barcode\BarcodeGeneratorJPG();
+        file_put_contents('product/barcodes/'.$product_code . '.jpg' ,
+        $generator->getBarcode($product_code,
+        $generator::TYPE_CODE_128, 3, 50));
 
         // Product::create($request->all());
-        $products = new Product;
         $products->product_name = $request->product_name;
         $products->product_code = $product_code;
-        $products->barcode = $barcodes;
+        $products->barcode = $product_code . '.jpg';
         $products->quantity = $request->quantity;
         $products->price = $request->price;
         $products->brand = $request->brand;
@@ -98,19 +109,52 @@ class ProductController extends Controller
     public function update(Request $request, $products)
     {
 
-        $product_code = rand(109876543, 1000000000);
+        //product code section
+        $product_code = $request->product_code;
 
-        $redColor = '255, 0 , 0';
-        $generator = new Picqer\Barcode\BarcodeGeneratorJPG();
-        file_put_contents('products/barcodes/' .$product_code . '.jpg',
-        $generator->getBarcode($product_code,
-        $generator::TYPE_CODE_128, 3, 50));
+        $products = Product::find($products);
+
+        //product image section
+        if ($request->hasFile('product_image')) {
+            if ($products->product_image != '') {
+                $proImage_path = public_path() . '/product/images' . $products->product_image;
+                unlink($proImage_path);
+            }
+            $file = $request->file('product_image');
+            $file->move(public_path().'/product/images',
+            $file->getClientOriginalName());
+            $product_image = $file->getClientOriginalName();
+            $products->product_image=$product_image;
+        }
+
+       //barcode image section
+
+        if ($request->product_code != '' && 
+        $request->product_code != $products->product_code) {
+
+            $unique = Product::where('product_code', $product_code)->first();
+
+            if ($unique) {
+                return redirect()->back()->with('error', 'Product code already exists!');
+
+            }
+
+            if ($products->barcode != '') {
+                $barcode_path = public_path() . '/product/barcodes' . $products->barcode;
+                unlink($barcode_path);
+            }
+            $generator = new Picqer\Barcode\BarcodeGeneratorJPG();
+            file_put_contents('product/barcodes/'.$product_code . '.jpg' ,
+            $generator->getBarcode($product_code,
+            $generator::TYPE_CODE_128, 3, 50));
+            $products->barcode = $product_code . '.jpg';
+        }
+
+        
 
        
-        $products = Product::find($products);
         $products->product_name = $request->product_name;
         $products->product_code = $product_code;
-        $products->barcode = $product_code . '.jpg';
         $products->quantity = $request->quantity;
         $products->price = $request->price;
         $products->brand = $request->brand;
