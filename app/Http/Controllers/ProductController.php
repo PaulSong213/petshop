@@ -115,7 +115,7 @@ class ProductController extends Controller
             'price' => 'required|numeric|min:1',
             'alert_stock' => 'required|numeric|min:0',
             'quantity' => 'required|numeric|min:0',
-            'product_code' => 'required'
+            'product_code' => 'required|unique:App\Models\Product,product_code'
         ]);
         //product code section
         $product_code = $request->product_code;
