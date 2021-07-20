@@ -73,62 +73,7 @@
                                        </div>
                                    </td>
                                 </tr>
-                                <div class="modal right fade" id="editproduct{{$product->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                    <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h4 class="modal-title" id="staticBackdropLabel">Edit product</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                      {{$product->id}}   
-                                    </div>
-                                    <div class="modal-body">
-                                      <form action="{{route('products.update', $product->id)}}" method="POST">
-                                    
-                                        @csrf
-                                        @method('put')
-                                        <div class="form-group">
-                                            <label for="">Product Name</label>
-                                            <input type="text" name="product_name" id="" value="{{$product->product_name}}" class="form-control">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="">Brand</label>
-                                            <input type="text" name="brand" id="" value="{{$product->brand}}" class="form-control">
-
-                                        </div>            
-
-                                        <div class="form-group">
-                                            <label for="">Price</label>
-                                            <input type="number" name="price" id="" value="{{$product->price}}"class="form-control">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="">Quantity</label>
-                                            <input type="number" name="quantity" id="" value="{{$product->quantity}}" class="form-control">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="">Alert Stock</label>
-                                            <input type="number" name="alert_stock" id="" value="{{$product->alert_stock}}" class="form-control">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="">Description</label>
-                                            <textarea name="description" id=""cols="30" rows="2" class="form-control">{{$product->description}}</textarea>
-                                        </div>
-                                        
-                                        <div class="modal-footer">
-                                            <button class="btn btn-primary btn-block">Update Product</button>
-                                        </div>
-                                    </form>
-                                      
-                                    </div>
-                                    
-                                  </div>
-                                    </div>
-                                </div>
+                                @include('products.edit')
 
                                 <div class="modal right fade" id="deleteproduct{{$product->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -185,7 +130,7 @@
         </button>   
         </div>
         <div class="modal-body">
-          <form action="{{route('products.store')}}" method="POST">
+          <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data" autocomplete="off">
         
             @csrf
 
@@ -193,6 +138,13 @@
                 <label for="">Product Name</label>
                 <input type="text" name="product_name" value="{{ old('product_name') }}" id="" class="form-control @error('product_name') border border-danger @enderror">
                 @error('product_name')
+                <strong class="text-danger">{{ $message }}</strong>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="">Product Code</label>
+                <input type="text" name="product_code" value="{{ old('product_code') }}" id="" class="form-control @error('product_code') border border-danger @enderror">
+                @error('product_code')
                 <strong class="text-danger">{{ $message }}</strong>
                 @enderror
             </div>
@@ -229,8 +181,15 @@
 
             <div class="form-group">
                 <label for="">Description</label>
-                <textarea name="description" id="" cols="30" rows="2" class="form-control @error('description') border border-danger @enderror" value="{{ old('description') }}"></textarea>
+                <textarea name="description" id="description" cols="30" rows="2" class="form-control @error('description') border border-danger @enderror" value="{{ old('description') }}"></textarea>
                 @error('description')
+                <strong class="text-danger">{{ $message }}</strong>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="">Product Image</label>
+                <input type="file" name="product_image" id="product_image" cols="30" rows="2" class="form-control @error('product_image') border border-danger @enderror" value="{{ old('product_image') }}">
+                @error('product_image')
                 <strong class="text-danger">{{ $message }}</strong>
                 @enderror
             </div>
