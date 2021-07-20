@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env("Johan's Pet Hub", 'Johans Pet Hub'),
+    'name' => env("Johan's Pet Hub", "Johan's Pet Hub"),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
