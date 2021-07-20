@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <title>Johan's | Pet Hub</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/images/logo.jpg" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -157,8 +158,13 @@
             $('.close-alert').click(function(){
                 $('.alert-added').hide(400);
             });
-            @if ($errors->any())
+            @if ($errors->any() && session('fromAdd'))
             $('.add-item').click();
+            @endif
+
+            @if ($errors->any() && session('fromEdit'))
+            const editId = "{{session('fromEdit')}}";
+            $('#edit' + editId).click();
             @endif
 
             $("#search-table").bind("DOMSubtreeModified", function() {

@@ -12,11 +12,11 @@
 
 <style>
     .btn-outline{
-        border-color: #008888;
-        color: #008888 ;
+        border-color: #d37d2c;
+        color: #d37d2c;
     }
     .btn-outline:hover{
-        background: #008888;
+        background: #d37d2c;
         color: #fff ;
     }
 

@@ -26,7 +26,7 @@
                             <i class="fas fa-plus"> Add New Users</i></a></div>
                     <div class="card-body overflow-auto">
                         <section id="search-table">
-                            @if (sizeof($users) > 0))
+                            @if (sizeof($users) > 0)
                                 @livewire('table',['tableColumns' => array_keys($users->first()->toArray()), 'excludedColumns' => ['id','email_verified_at','created_at','updated_at'], 'tableTitle' => 'Search Users'])
                             @endif
                         </section>  
@@ -52,7 +52,8 @@
                                    <td>
                                        <div class="btn-group">
                                            <a href="#" class="btn btn-info btnt-sm"
-                                           data-toggle="modal" 
+                                           data-toggle="modal"
+                                           id="edit{{$user->id}}" 
                                            data-target="#editUser{{$user->id}}">
                                                <i class="fas fa-edit"> Edit</i></a>
                                                <a href="#"  data-toggle="modal" 
@@ -72,21 +73,51 @@
                                     </div>
                                     <div class="modal-body">
                                       <form action="{{route('users.update', $user->id)}}" method="POST">
-                                    
+                                        
+                                        @php
+                                            $name = $user->name;
+                                            $email = $user->email;
+                                            $password = $user->password;
+                                            $isAdmin = $user->is_admin;
+                                        @endphp
+
+                                        @if(session('fromEdit') == $user->id && $errors->any() )
+                                            @php
+                                            $name = old('name');
+                                            $email = old('email');
+                                            $isAdmin = old('is_admin');
+                                            @endphp
+                                        @endif
+
                                         @csrf
                                         @method('put')
                                         <div class="form-group">
                                             <label for="">Name</label>
-                                            <input type="text" name="name" id="" value="{{$user->name}}" class="form-control">
+                                            <input type="text" name="name" id="" value="{{$name}}" class="form-control  @if(session('fromEdit')) @error('name') border border-danger @enderror @endif">
+                                            @if(session('fromEdit'))
+                                            @error('name')
+                                                <strong class="text-danger">{{ $message }}</strong>
+                                            @enderror  
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <label for="">Email</label>
-                                            <input type="email" name="email" id="" value="{{$user->email}}" class="form-control">
+                                            <input type="email" name="email" id="" value="{{$email}}" class="form-control @if(session('fromEdit')) @error('name') border border-danger @enderror @endif">
+                                            @if(session('fromEdit'))
+                                            @error('email')
+                                                <strong class="text-danger">{{ $message }}</strong>
+                                            @enderror  
+                                            @endif
                                         </div>
                                         
                                         <div class="form-group">
                                             <label for="">Password</label>
-                                            <input type="password" name="password"  id="" readonly value="{{$user->password}}" class="form-control">
+                                            <input type="password" name="password"  id="" readonly value="{{$password}}" class="form-control @if(session('fromEdit')) @error('password') border border-danger @enderror @endif">
+                                            @if(session('fromEdit'))
+                                            @error('password')
+                                                <strong class="text-danger">{{ $message }}</strong>
+                                            @enderror  
+                                            @endif
                                         </div>
                                        
                                         <div class="form-group">
@@ -166,48 +197,72 @@
         </button>   
         </div>
         <div class="modal-body">
+          
+            @php
+                $name = "";
+                $email = "";
+                $isAdmin = true;
+            @endphp
+            @if(session('fromAdd') && $errors->any())
+            @php
+                $name = old('name');
+                $email = old('email');
+                $isAdmin = old('is_admin');
+            @endphp
+            @endif
+            
           <form action="{{route('users.store')}}" method="POST">
         
             @csrf
 
             <div class="form-group">
                 <label for="">Name</label>
-                <input type="text" name="name" id="" class="form-control @error('name') border border-danger @enderror" value="{{ old('name') }}">
+                <input type="text" name="name" id="" class="form-control @if(session('fromAdd')) @error('name') border border-danger @enderror @endif" value="{{ $name }}">
+                @if(session('fromAdd'))
                 @error('name')
                     <strong class="text-danger">{{ $message }}</strong>
                 @enderror  
+                @endif
             </div>
             <div class="form-group">
                 <label for="">Email</label>
-                <input type="email" name="email" id="" class="form-control @error('email') border border-danger @enderror" value="{{ old('email') }}">
+                <input type="email" name="email" id="" class="form-control @if(session('fromAdd')) @error('email') border border-danger @enderror @endif" value="{{ $email }}">
+                @if(session('fromAdd'))
                 @error('email')
                     <strong class="text-danger">{{ $message }}</strong>
                 @enderror 
+                @endif
             </div>
 
             <div class="form-group">
                 <label for="">Password</label>
-                <input type="password" name="password" id="" class="form-control @error('password') border border-danger @enderror">
+                <input type="password" name="password" id="" class="form-control @if(session('fromAdd')) @error('password') border border-danger @enderror @endif">
+                @if(session('fromAdd'))
                 @error('password')
                     <strong class="text-danger">{{ $message }}</strong>
                 @enderror 
+                @endif
             </div>
             <div class="form-group">
                 <label for="">Confirm Password</label>
-                <input type="password" name="confirm_password" id="" class="form-control @error('confirm_password') border border-danger @enderror">
+                <input type="password" name="confirm_password" id="" class="form-control @if(session('fromAdd')) @error('confirm_password') border border-danger @enderror @endif">
+                @if(session('fromAdd'))
                 @error('confirm_password')
                     <strong class="text-danger">{{ $message }}</strong>
                 @enderror 
+                @endif
             </div>
             <div class="form-group">
                 <label for="">Role</label>
-                <select name="is_admin" id="" class="form-control @error('is_admin') border border-danger @enderror" value="{{ old('is_admin') }}">
+                <select name="is_admin" id="" class="form-control @if(session('fromAdd')) @error('is_admin') border border-danger @enderror @endif" value="{{ $isAdmin }}">
                     <option value="1">Admin</option>
                     <option value="2">Cashier</option>
                 </select>
+                @if(session('fromAdd'))
                 @error('is_admin')
                     <strong class="text-danger">{{ $message }}</strong>
                 @enderror
+                @endif
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary btn-block">Save User</button>
