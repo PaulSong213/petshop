@@ -148,7 +148,7 @@ class ProductController extends Controller
             }
 
             if ($products->barcode != '') {
-                $barcode_path = public_path() . '/product/barcodes' . $products->barcode;
+                $barcode_path = public_path() . '/product/barcodes/' . $products->barcode;
                 unlink($barcode_path);
             }
             $generator = new Picqer\Barcode\BarcodeGeneratorJPG();
