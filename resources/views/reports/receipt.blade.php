@@ -10,12 +10,12 @@
             <h1 class="company-name">STONE BASE</h1>
             
             <div class="info-email-number">
-                <h6 class="email">stonebase@gmail.com</h6>
-                <h6>+63912346754</h6>
+                <h6 class="email">johanspethub@yahoo.com</h6>
+                <h6>+63 916 461 4767</h6>
             </div>
         </div>
         <div class="logo-container">
-            <img class="logo" src="/images/logo.png" alt="logo">
+            <img class="logo" src="/images/logo.jpg" alt="logo">
         </div>
         
     </nav>

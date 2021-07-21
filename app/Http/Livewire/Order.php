@@ -44,7 +44,7 @@ class Order extends Component
     }
 
     public function InserttoCart(){
-        $countProduct = Product::where('id', $this->product_code)->first();
+        $countProduct = Product::where('product_code', $this->product_code)->first();
 
         if(!$countProduct){
             return session()->flash('error', 'Product not found! Please input the right product code.');
