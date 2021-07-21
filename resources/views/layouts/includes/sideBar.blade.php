@@ -7,7 +7,7 @@
             <a href="/home"><i class="fa fa-align-justify"></i>Dashboard</a>
         </li>
         <li>
-            <a href="{{route('orders.index')}}"><i class="fas fa-desktop fa-lg"></i> Orders</a>
+            <a href="{{route('orders.index')}}"><i class="fas fa-desktop fa-lg"></i> Cashier</a>
         </li>
         <li>
             <a href="{{route('transactions.index')}}"><i class="fas fa-money-bill fa-lg"></i> Transactions</a>

@@ -2,6 +2,8 @@
 
 @section('content')
 
+
+@livewire('products')
 <div class="container-fluid">
     
     @if (session('success'))
