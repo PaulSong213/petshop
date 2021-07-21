@@ -118,6 +118,6 @@ class UserController extends Controller
             return back()->with('Error', 'User not found');
         }
         $users->delete();
-        return back()->with('Success', 'User Deleted Successfully!');
+        return back()->with('success', 'User Deleted Successfully!');
     }
 }

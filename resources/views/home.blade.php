@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-xl-9">
             <div class="card">
-                <h4 class="card-header" style="background: #d37d2c;; color:#fff"><marquee behavior="" direction="">Welcome to Pepay's peps store</marquee></h4>
+                <h4 class="card-header" style="background: #d37d2c;; color:#fff"><marquee behavior="" direction="">Welcome to Johan'n Pet Hub</marquee></h4>
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
