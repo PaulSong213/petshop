@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class UserController extends Controller
 {
+    use RegistersUsers;
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -43,15 +51,15 @@ class UserController extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'email' => 'required|email:rfc|unique:App\Models\User,email',
-            'password' => 'required|min:8',
-            'confirm_password' => 'required|in:'.$password,
+            'password' => 'required|min:8|confirmed',
+            'password_confirmation' => 'required|in:'.$password,
             'is_admin' => 'required',
         ]);
 
-        $users = new User;
+        $users = new User();
         $users->name = $request->name;
         $users->email = $request->email;
-        $users->password = md5($request->pasword);
+        $users->password = Hash::make($password);
         $users->is_admin = $request->is_admin;
         if($users->save()){
             return redirect()->back()->with('success','User Created Successfully');
@@ -93,7 +101,7 @@ class UserController extends Controller
         redirect()->back()->with('fromEdit', $id);
         $validated = $request->validate([
             'name' => 'required',
-            'email' => 'required|email:rfc|unique:App\Models\User,email',
+            'email' => 'required',
             'password' => 'required|min:8',
             'is_admin' => 'required',
         ]);

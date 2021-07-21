@@ -12,7 +12,9 @@
               @foreach ($tableColumnsName as $column)
               <th> {{$column}} </th>    
               @endforeach
+              @if ( Auth::user()->is_admin == 1 )
               <th>Actions</th>
+              @endif
           </tr>
       </thead>
       <tbody>
@@ -38,6 +40,7 @@
 
               </td>    
               @endforeach
+              @if ( Auth::user()->is_admin == 1 )
               <td>
                   <div class="btn-group">
                       <a href="#" class="btn btn-info btnt-sm"
@@ -48,6 +51,7 @@
                           data-target="#deleteItem{{$row['id']}}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</a>
                   </div>
               </td>
+              @endif
           </tr>
 
         <div class="modal right fade" id="deleteItem{{$row['id']}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

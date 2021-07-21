@@ -13,7 +13,9 @@
                 @foreach ($tableColumnsName as $column)
                 <th> {{$column}} </th>    
                 @endforeach
+                @if ( Auth::user()->is_admin == 1 )
                 <th>Actions</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -40,6 +42,7 @@
                 </td>    
                 @endforeach
                 {{-- ACTIONS --}}
+                @if ( Auth::user()->is_admin == 1 )
                 <td>
                     <div class="btn-group">
                         <a href="#" class="btn btn-info btnt-sm"
@@ -50,6 +53,7 @@
                             data-target="#deleteproduct{{$row['id']}}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</a>
                     </div>
                 </td>
+                @endif
             </tr>
             @endforeach
             @if (sizeof($tableRows) == 0)

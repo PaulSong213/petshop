@@ -22,9 +22,12 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 style="float: left"><i class="fas fa-box"></i> Products</h4>
+                        @if ( Auth::user()->is_admin == 1 )
                         <a href="#" style="float: right" class="btn btn-dark add-item" 
                         data-toggle="modal" data-target="#addproduct">
-                            <i class="fas fa-plus"> Add New Products</i></a></div>
+                            <i class="fas fa-plus"> Add New Products</i></a>
+                        @endif
+                        </div>
                     <div class="card-body overflow-auto" >
                         <section id="search-table">
                             @if (sizeof($products) > 0)
@@ -42,7 +45,9 @@
                                     <th>Quantity</th>
                                     <th>Alert Stock</th>
                                     <th>Description</th>
+                                    @if ( Auth::user()->is_admin == 1 )
                                     <th>Actions</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -61,7 +66,7 @@
                                     @endif
                                     </td>
                                     <td>{{$product->description}}</td>
-                                    
+                                    @if ( Auth::user()->is_admin == 1 )
                                    <td>
                                        <div class="btn-group">
                                            <a href="#" class="btn btn-info btnt-sm"
@@ -73,6 +78,7 @@
                                                data-target="#deleteproduct{{$product->id}}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</a>
                                        </div>
                                    </td>
+                                   @endif
                                 </tr>
                                 @include('products.edit')
 
