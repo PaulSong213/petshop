@@ -21,9 +21,12 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 style="float: left"><i class="fas fa-user"></i> Users</h4>
+                        @if ( Auth::user()->is_admin == 1 )
                         <a href="#" style="float: right" class="btn btn-dark add-item" 
                         data-toggle="modal" data-target="#addUser">
-                            <i class="fas fa-plus"> Add New Users</i></a></div>
+                            <i class="fas fa-plus"> Add New Users</i></a>
+                        @endif    
+                        </div>
                     <div class="card-body overflow-auto">
                         <section id="search-table">
                             @if (sizeof($users) > 0)
@@ -37,7 +40,9 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Role</th>
+                                    @if ( Auth::user()->is_admin == 1 )
                                     <th>Actions</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -49,6 +54,7 @@
                                     <td>@if ($user->is_admin ==1)Admin
                                         @else Cashier
                                     @endif </td>
+                                    @if ( Auth::user()->is_admin == 1 )
                                    <td>
                                        <div class="btn-group">
                                            <a href="#" class="btn btn-info btnt-sm"
@@ -60,6 +66,7 @@
                                                data-target="#deleteUser{{$user->id}}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</a>
                                        </div>
                                    </td>
+                                   @endif
                                 </tr>
                                 <div class="modal right fade" id="editUser{{$user->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -245,9 +252,9 @@
             </div>
             <div class="form-group">
                 <label for="">Confirm Password</label>
-                <input type="password" name="confirm_password" id="" class="form-control @if(session('fromAdd')) @error('confirm_password') border border-danger @enderror @endif">
+                <input type="password" name="password_confirmation" id="" class="form-control @if(session('fromAdd')) @error('password_confirmation') border border-danger @enderror @endif">
                 @if(session('fromAdd'))
-                @error('confirm_password')
+                @error('password_confirmation')
                     <strong class="text-danger">{{ $message }}</strong>
                 @enderror 
                 @endif
@@ -275,17 +282,5 @@
         </div>
     </div>
 
-  <style>
-      .modal.right .modal-dialog{
-          top: 0;
-          right: 0;
-          margin-right: 3vh;
-      }
-
-      .modal-fade:not(.in).right .modal-dialog{
-          -webkit-transform: translate3d(25%,0,0);
-          transform: translate3d(25%, 0, 0);
-      }
-  </style>
-
+  
 @endsection

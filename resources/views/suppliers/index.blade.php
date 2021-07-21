@@ -24,9 +24,12 @@
             <div class="card">
                 <div class="card-header">
                     <h4 style="float: left"><i class="fas fa-box"></i> Suppliers</h4>
+                    @if ( Auth::user()->is_admin == 1 )
                     <a href="#" style="float: right" class="btn btn-dark add-item" 
                     data-toggle="modal" data-target="#addsupplier">
-                        <i class="fas fa-plus"> Add New Supplier</i></a></div>
+                        <i class="fas fa-plus"> Add New Supplier</i></a>
+                    @endif
+                    </div>
                 <div class="card-body overflow-auto" >
                     <section id="search-table">
                         @if (sizeof($suppliers) > 0)
