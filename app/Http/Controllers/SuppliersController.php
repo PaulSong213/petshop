@@ -14,7 +14,8 @@ class SuppliersController extends Controller
      */
     public function index()
     {
-        //
+        $suppliers = Suppliers::paginate(5);
+        return view('suppliers.index', ['suppliers' => $suppliers]);        
     }
 
     /**
@@ -35,7 +36,23 @@ class SuppliersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        redirect()->back()->with('fromAdd', true);
+        $validated = $request->validate([
+            'supplier_name' => 'required',
+            'email' => 'required|email:rfc|unique:App\Models\Suppliers,email',
+            'phone' => 'required'
+        ]);
+
+        $supplier = new Suppliers;
+        $supplier->supplier_name = $request->supplier_name;
+        $supplier->email = $request->email;
+        $supplier->address = $request->address;
+        $supplier->phone = $request->phone;
+
+        if($supplier->save()){
+            return redirect()->back()->with('success','Supplier Created Successfully');
+        }
+        return redirect()->back()->with('Supplier Creation Failed');
     }
 
     /**
@@ -78,8 +95,13 @@ class SuppliersController extends Controller
      * @param  \App\Models\Suppliers  $suppliers
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Suppliers $suppliers)
+    public function destroy($id)
     {
-        //
+        $suppliers = Suppliers::find($id);
+        if(!$suppliers){
+            return back()->with('Error', 'Supplier not found');
+        }
+        if($suppliers->delete())return back()->with('success', 'User Deleted Successfully!');
+        
     }
 }

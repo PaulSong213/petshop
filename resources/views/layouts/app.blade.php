@@ -125,6 +125,17 @@
                 border: 0;
             }
 
+            .modal.right .modal-dialog{
+                top: 0;
+                right: 0;
+                margin-right: 3vh;
+            }
+
+            .modal-fade:not(.in).right .modal-dialog{
+                -webkit-transform: translate3d(25%,0,0);
+                transform: translate3d(25%, 0, 0);
+            }
+
             h4 {
                 font-family: Verdana, Geneva, Tahoma, sans-serif;
                 font-size: 20px;
