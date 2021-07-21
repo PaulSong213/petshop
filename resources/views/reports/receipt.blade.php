@@ -5,7 +5,7 @@
         // print_r($order_receipt);
     ?>
     <nav id="receipt-nav">
-        <img src="/images/receipt-nav-bg.png" class="receipt-nav-bg">
+        <img src="/images/receipt/receipt-nav-bg.png" class="receipt-nav-bg">
         <div class="name-cotainer">
             <h1 class="company-name">STONE BASE</h1>
             
@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="logo-container">
-            <img class="logo" src="/images/logo.jpg" alt="logo">
+            <img class="logo" src="/images/receipt/logo.jpg" alt="logo">
         </div>
         
     </nav>
@@ -52,7 +52,7 @@
             <h3>Unit</h3>
             <h3>Discount</h3>
             <h3>Subtotal</h3>
-            <img src="/images/receipt-thead-bg.jpg" class="t-head-bg">
+            <img src="/images/receipt/receipt-thead-bg.jpg" class="t-head-bg">
         </div>
 
         <div class="t-body">
@@ -77,13 +77,14 @@
         <?php $tax = $total * 0.15;
             //  $total += $tax ?>
         {{-- Tax --}}
-        <div class="tax-price">
+        {{-- <div class="tax-price">
             <h2>Tax</h2>
             <h2>₱0</h2>
-        </div>
+        </div> --}}
         {{-- Total price --}}
         <div class="total-price">
             <h2>₱<?= $total ?></h2>
+            <img src="/images/receipt/infos.png" class="total-bg" alt="">
         </div>
     </main>
 
@@ -101,6 +102,12 @@
 
 <style>
 
+    .total-bg {
+        position: absolute;
+        width: 100px;
+        z-index: 1;
+        right: 0;
+    }
     *{
         font-family: Nunito, Arial, Helvetica, sans-serif;
         margin: 0;
@@ -257,17 +264,15 @@
     }
 
     .total-price {
-        background: url('/images/receipt-total-bg.jpg');
+        position: relative;
         background-size: 100%;
         background-repeat: no-repeat;
         width: 30mm;
         margin-top: 5px;
         margin-left: auto;
-        margin-right: 5px;
         margin-bottom: 10px;
         display: flex;
         justify-content: end;
-        padding: 5px 5px;
     }
 
     .total-price h2 {
@@ -275,6 +280,9 @@
         font-size: 12px;
         width: 100%;
         text-align: right;
+        z-index: 4;
+        display: table;
+        margin: 2px 5px;
     }
 
     .legalcopy {
