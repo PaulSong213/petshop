@@ -11,6 +11,7 @@
                 {{ $product->id }}
             </div>
             <div class="modal-body">
+                
                 <form action="{{ route('products.destroy', $product->id) }}" method="POST">
 
                     @csrf
