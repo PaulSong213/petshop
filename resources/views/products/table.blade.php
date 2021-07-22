@@ -9,7 +9,9 @@
                                         <th>Quantity</th>
                                         <th>Alert Stock</th>
                                         <th>Description</th>
+                                        @if ( Auth::user()->is_admin == 1 )
                                         <th>Actions</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -31,7 +33,7 @@
                                                 @endif
                                             </td>
                                             <td>{{ $product->description }}</td>
-
+                                            @if ( Auth::user()->is_admin == 1 )
                                             <td>
                                                 <div class="btn-group">
                                                     <a href="#" class="btn btn-info btnt-sm" data-toggle="modal"
@@ -44,6 +46,7 @@
                                                         Delete</a>
                                                 </div>
                                             </td>
+                                            @endif
                                         </tr>
 
                                        {{-- Modal Edit --}}

@@ -7,7 +7,7 @@
     <nav id="receipt-nav">
         <img src="/images/receipt/receipt-nav-bg.png" class="receipt-nav-bg">
         <div class="name-cotainer">
-            <h1 class="company-name">STONE BASE</h1>
+            <h1 class="company-name">JOHAN'S PET HUB</h1>
             
             <div class="info-email-number">
                 <h6 class="email">johanspethub@yahoo.com</h6>
@@ -183,7 +183,7 @@
     }
 
     .heading .title {
-        color: #1482C0;
+        color: #FF7F04;
         font-size: 20px;
         margin: auto 0;
     }
